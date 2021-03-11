@@ -1,0 +1,9 @@
+*.csv
+.vscode/
+!.vscode/tasks.json
+!.vscode/launch.json
+*.code-workspace
+
+__pycache__
+
+venv/
