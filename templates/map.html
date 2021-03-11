@@ -83,7 +83,7 @@
 </head>
 
 <body>
-    <div class="map-container">
+    <div class="map-container" id="cumulative-container">
         <h1>Cumulative</h1>
         <div id="cumulative-map" class="map">
         </div>
@@ -102,7 +102,7 @@
         </div>
     </div>
 
-    <div class="map-container">
+    <div class="map-container" id="daily-container">
         <h1>Daily</h1>
         <div id="daily-map" class="map">
         </div>
@@ -212,6 +212,8 @@
             color: "#0c0920"
         }, ];
 
+        let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6a", "#79146e", "#50046d", "#300061", "#0c0920"]
+
         (async function() {
             window.cumulativeMap = L.map('cumulative-map').setView([54.898, -5.416], 6);
             window.dailyMap = L.map('daily-map').setView([54.898, -5.416], 6);
@@ -243,15 +245,52 @@
                 .then(body => body.split("\n").map(line => line.split(/,(?![^,]+")/g)))
 
             let dateString = getSliderDateString(document.getElementById("slider").value)
-            covidMap = window.covidData.map(line => {
+            let covidLines = window.covidData.map(line => {
                 return {
                     date: line[0],
                     countyCode: line[2],
                     cumulative: line[4],
                     daily: line[5]
                 }
-            }).reduce((map, line) => { // Cumulative
-                // covidMap = window.covidData.map(line => [line[0], line[2], line[5]]).reduce((map, line) => { // Daily
+            })
+
+            let cumulativeArray = Object.keys(covidMap).flatMap(date => {
+                return Object.keys(covidMap[date]).reduce((a, key) => {
+                    if (isNaN(covidMap[date][key].cumulative)) {
+                        return a
+                    }
+                    a.push(covidMap[date][key].cumulative)
+                    return a;
+                }, [])
+            }).sort((a, b) => a - b)
+
+            let cumulativeDeciles = []
+
+            for (let i = 1; i <= 10; i++) {
+                let decile = cumulativeArray[Math.floor((cumulativeArray.length - 1) * (i / 10))]
+                decile = Number(decile.toPrecision(2))
+                if (i === 1) {
+                    decile = 0
+                }
+                cumulativeDeciles.push(decile)
+            }
+
+            for (let i = 0; i < cumulativeDeciles.length; i++) {
+
+            }
+
+            let dailyArray = Object.keys(covidMap).flatMap(date => {
+                return Object.keys(covidMap[date]).reduce((a, key) => {
+                    if (isNaN(covidMap[date][key].daily)) {
+                        return a
+                    }
+                    a.push(covidMap[date][key].daily)
+                    return a;
+                }, [])
+            }).sort((a, b) => a - b)
+
+
+            covidMap = covidLines.reduce((map, line) => {
                 if (line.date === "date") return map;
                 let obj = {}
                 obj.cumulative = +line.cumulative
@@ -267,6 +306,12 @@
                 return map;
             }, {})
 
+            console.log(covidMap)
+
+
+
+
+
             dateUpdate(dateString)
 
             let cumulativeGeoJson = L.geoJSON(mapData).bindTooltip(function(layer) {
@@ -280,6 +325,8 @@
             }).addTo(window.dailyMap);
 
             dateUpdate(getSliderDateString(document.getElementById("slider").value))
+
+            console.log(JSON.stringify(covidMap))
 
         })()
 
