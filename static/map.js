@@ -32,9 +32,41 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
     let mapData = await fetch('https://coronavirus.data.gov.uk/downloads/maps/utla-ref.geojson').then(data => data.json())
         // let mapData = await fetch('https://coronavirus.data.gov.uk/downloads/maps/utla_data_latest.geojson').then(data => data.json())
 
-    window.covidData = await fetch("/static/covid-data.csv")
-        .then(data => data.text())
-        .then(body => body.split("\n").map(line => line.split(/,(?![^,]+")/g)))
+    let covidDataFetch = await fetch("/static/covid-data.csv")
+
+    const reader = covidDataFetch.body.getReader();
+    const totalLength = Number(covidDataFetch.headers.get("Content-Length"))
+
+    let chunks = [];
+    let receivedLength = 0;
+    while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) {
+            break;
+        }
+
+        chunks.push(value);
+        receivedLength += value.length;
+
+        document.querySelectorAll(".progress-bar span").forEach(n => n.setAttribute("style", `width: ${(receivedLength / totalLength) * 100}%`))
+        document.querySelectorAll(".progress-overlay .progress-label").forEach(n => n.innerHTML = `&nbsp;Loading data ${Math.floor((receivedLength / totalLength) * 100)}%...`)
+
+        console.log(`Received ${receivedLength} of ${totalLength}`)
+    }
+
+    document.querySelectorAll(".progress-overlay").forEach(n => n.remove())
+
+    let chunksAll = new Uint8Array(receivedLength);
+    let position = 0;
+    for (let chunk of chunks) {
+        chunksAll.set(chunk, position);
+        position += chunk.length;
+    }
+
+    let result = new TextDecoder("utf-8").decode(chunksAll);
+
+    window.covidData = result.split("\n").map(line => line.split(/,(?![^,]+")/g))
 
     let dateString = getSliderDateString(document.getElementById("slider").value)
     let covidLines = window.covidData.map(line => {
