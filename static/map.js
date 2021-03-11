@@ -134,8 +134,6 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
 
     dateUpdate(getSliderDateString(document.getElementById("slider").value))
 
-    console.log(JSON.stringify(covidMap))
-
 })()
 
 document.getElementById("slider").addEventListener("input", function(e) {
