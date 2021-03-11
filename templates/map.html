@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <style>
+        .map {
+            height: 800px;
+        }
+        
+        #overlay {
+            z-index: 1000;
+            position: absolute;
+            bottom: 2em;
+            right: 1em;
+            background-color: white;
+            width: fit-content;
+            height: fit-content;
+            border: 1px solid black;
+            padding: 0.5em 1em;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        #overlay div span {
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            border-radius: 50%;
+            margin-right: 1em;
+        }
+        
+        #overlay-percentile-1 span {
+            background-color: #fcde95;
+        }
+        
+        #overlay-percentile-2 span {
+            background-color: #fc9860;
+        }
+        
+        #overlay-percentile-3 span {
+            background-color: #f5614b;
+        }
+        
+        #overlay-percentile-4 span {
+            background-color: #dc3852;
+        }
+        
+        #overlay-percentile-5 span {
+            background-color: #ba2760;
+        }
+        
+        #overlay-percentile-6 span {
+            background-color: #941b6a;
+        }
+        
+        #overlay-percentile-7 span {
+            background-color: #79146e;
+        }
+        
+        #overlay-percentile-8 span {
+            background-color: #50046d;
+        }
+        
+        #overlay-percentile-9 span {
+            background-color: #300061;
+        }
+        
+        #overlay-percentile-10 span {
+            background-color: #0c0920;
+        }
+        
+        .map-container {
+            position: relative;
+            display: inline-block;
+            width: 48%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map-container">
+        <h1>Cumulative</h1>
+        <div id="cumulative-map" class="map">
+        </div>
+
+        <div id="overlay">
+            <div id="overlay-percentile-1"><span></span>0 - 230</div>
+            <div id="overlay-percentile-2"><span></span>230 - 430</div>
+            <div id="overlay-percentile-3"><span></span>430 - 620</div>
+            <div id="overlay-percentile-4"><span></span>620 - 830</div>
+            <div id="overlay-percentile-5"><span></span>830 - 1100</div>
+            <div id="overlay-percentile-6"><span></span>1100 - 1400</div>
+            <div id="overlay-percentile-7"><span></span>1400 - 1900</div>
+            <div id="overlay-percentile-8"><span></span>1900 - 3100</div>
+            <div id="overlay-percentile-9"><span></span>3100 - 34000</div>
+            <div id="overlay-percentile-10"><span></span>34000+</div>
+        </div>
+    </div>
+
+    <div class="map-container">
+        <h1>Daily</h1>
+        <div id="daily-map" class="map">
+        </div>
+
+        <div id="overlay">
+            <div id="overlay-percentile-1"><span></span>0 - 1</div>
+            <div id="overlay-percentile-2"><span></span>1 - 2</div>
+            <div id="overlay-percentile-3"><span></span>2 - 3</div>
+            <div id="overlay-percentile-4"><span></span>3 - 5</div>
+            <div id="overlay-percentile-5"><span></span>5 - 9</div>
+            <div id="overlay-percentile-6"><span></span>9 - 14</div>
+            <div id="overlay-percentile-7"><span></span>14 - 24</div>
+            <div id="overlay-percentile-8"><span></span>24 - 47</div>
+            <div id="overlay-percentile-9"><span></span>47 - 1100</div>
+            <div id="overlay-percentile-10"><span></span>1100+</div>
+        </div>
+    </div>
+
+
+    <input id="slider" type="range" min="0" max="274" width="100%">
+    <p id="date"></p>
+
+    <script>
+        let covidMap = {};
+
+        let cumulativeColorScale = [{
+            min: -1,
+            max: 230,
+            color: "#fcde95"
+        }, {
+            min: 230,
+            max: 430,
+            color: "#fc9860"
+        }, {
+            min: 430,
+            max: 620,
+            color: "#f5614b"
+        }, {
+            min: 620,
+            max: 830,
+            color: "#dc3852"
+        }, {
+            min: 830,
+            max: 1100,
+            color: "#ba2760"
+        }, {
+            min: 1100,
+            max: 1400,
+            color: "#941b6a"
+        }, {
+            min: 1400,
+            max: 1900,
+            color: "#79146e"
+        }, {
+            min: 1900,
+            max: 3100,
+            color: "#50046d"
+        }, {
+            min: 3100,
+            max: 34000,
+            color: "#300061"
+        }, {
+            min: 34000,
+            max: Number.MAX_VALUE,
+            color: "#0c0920"
+        }, ];
+
+        let dailyColorScale = [{
+            min: -1,
+            max: 1,
+            color: "#fcde95"
+        }, {
+            min: 1,
+            max: 2,
+            color: "#fc9860"
+        }, {
+            min: 2,
+            max: 3,
+            color: "#f5614b"
+        }, {
+            min: 3,
+            max: 5,
+            color: "#dc3852"
+        }, {
+            min: 5,
+            max: 9,
+            color: "#ba2760"
+        }, {
+            min: 9,
+            max: 14,
+            color: "#941b6a"
+        }, {
+            min: 14,
+            max: 24,
+            color: "#79146e"
+        }, {
+            min: 24,
+            max: 47,
+            color: "#50046d"
+        }, {
+            min: 47,
+            max: 1100,
+            color: "#300061"
+        }, {
+            min: 1100,
+            max: Number.MAX_VALUE,
+            color: "#0c0920"
+        }, ];
+
+        (async function() {
+            window.cumulativeMap = L.map('cumulative-map').setView([54.898, -5.416], 6);
+            window.dailyMap = L.map('daily-map').setView([54.898, -5.416], 6);
+            let cumulativeTileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>, <a href="https://coronavirus.data.gov.uk/details/interactive-map#:~:text=Attributions">Data and Boundaries © </a>',
+                maxZoom: 18,
+                id: 'mapbox/light-v10',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'pk.eyJ1IjoiYmluYXJ5b3ZlcmxvYWQiLCJhIjoiY2tsbXN2dDg5MGNlMDJvbXVicnN3Y2RxOSJ9.yCG6Sk6vz7qdhVT2gsWkpA'
+            });
+            let dailyTileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>, <a href="https://coronavirus.data.gov.uk/details/interactive-map#:~:text=Attributions">Data and Boundaries © </a>',
+                maxZoom: 18,
+                id: 'mapbox/light-v10',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'pk.eyJ1IjoiYmluYXJ5b3ZlcmxvYWQiLCJhIjoiY2tsbXN2dDg5MGNlMDJvbXVicnN3Y2RxOSJ9.yCG6Sk6vz7qdhVT2gsWkpA'
+            });
+            cumulativeTileLayer.addTo(window.cumulativeMap);
+            dailyTileLayer.addTo(window.dailyMap);
+
+            let counties = await fetch("/static/countyCodes.json").then(data => data.json())
+            let mapData = await fetch('https://coronavirus.data.gov.uk/downloads/maps/utla-ref.geojson').then(data => data.json())
+                // let mapData = await fetch('https://coronavirus.data.gov.uk/downloads/maps/utla_data_latest.geojson').then(data => data.json())
+
+            window.covidData = await fetch("/static/covid-data.csv")
+                .then(data => data.text())
+                .then(body => body.split("\n").map(line => line.split(/,(?![^,]+")/g)))
+
+            let dateString = getSliderDateString(document.getElementById("slider").value)
+            covidMap = window.covidData.map(line => {
+                return {
+                    date: line[0],
+                    countyCode: line[2],
+                    cumulative: line[4],
+                    daily: line[5]
+                }
+            }).reduce((map, line) => { // Cumulative
+                // covidMap = window.covidData.map(line => [line[0], line[2], line[5]]).reduce((map, line) => { // Daily
+                if (line.date === "date") return map;
+                let obj = {}
+                obj.cumulative = +line.cumulative
+                obj.daily = +line.daily
+                obj.cumulativeColor = getGradientColor(+line.cumulative, cumulativeColorScale)
+                obj.dailyColor = getGradientColor(+line.daily, dailyColorScale)
+                if (map[line.date]) {
+                    map[line.date][line.countyCode] = obj
+                } else {
+                    map[line.date] = {}
+                    map[line.date][line.countyCode] = obj
+                }
+                return map;
+            }, {})
+
+            dateUpdate(dateString)
+
+            let cumulativeGeoJson = L.geoJSON(mapData).bindTooltip(function(layer) {
+                let covidData = covidMap[getSliderDateString(document.getElementById("slider").value)][layer.feature.properties.code]
+                return counties[layer.feature.properties.code] + " (" + layer.feature.properties.code + ") - " + (covidData ? covidData.cumulative : "No Data");
+            }).addTo(window.cumulativeMap);
+
+            let dailyGeoJson = L.geoJSON(mapData).bindTooltip(function(layer) {
+                let covidData = covidMap[getSliderDateString(document.getElementById("slider").value)][layer.feature.properties.code]
+                return counties[layer.feature.properties.code] + " (" + layer.feature.properties.code + ") - " + (covidData ? covidData.daily : "No Data");
+            }).addTo(window.dailyMap);
+
+            dateUpdate(getSliderDateString(document.getElementById("slider").value))
+
+        })()
+
+        document.getElementById("slider").addEventListener("input", function(e) {
+            let dateString = getSliderDateString(e.target.value)
+            dateUpdate(dateString)
+        })
+
+        function getSliderDate(value) {
+            let date = new Date(2020, 0, 31)
+            date.setDate(date.getDate() + value)
+            return date
+        }
+
+        function dateUpdate(dateString) {
+            document.getElementById("date").innerText = dateString
+            setStyles(dateString)
+        }
+
+        function getSliderDateString(value) {
+            let date = getSliderDate(parseInt(value))
+            let dateString = `${Math.max(date.getDate(), 1).toString().padStart(2, "0")}/${(date.getMonth() + 1).toString().padStart(2, "0")}/${date.getFullYear()}`
+            return dateString
+        }
+
+        function getGradientColor(number, colorScale) {
+            // for (let color of dailyColorScale) { // daily
+            for (let color of colorScale) { // daily
+                if (number <= color.max && number > color.min) {
+                    return color.color
+                }
+            }
+            return "#000000"
+        }
+
+        function setStyles(date) {
+
+            window.cumulativeMap.eachLayer(function(layer) {
+                if (layer.setStyle && layer.feature) {
+                    let countyObject = covidMap[date][layer.feature.properties.code]
+                    let color = undefined
+                    if (countyObject) {
+                        color = covidMap[date][layer.feature.properties.code].cumulativeColor
+                    }
+                    layer.setStyle({
+                        color,
+                        weight: 1
+                    })
+                }
+            })
+
+            window.dailyMap.eachLayer(function(layer) {
+                if (layer.setStyle && layer.feature) {
+                    let countyObject = covidMap[date][layer.feature.properties.code]
+                    let color = undefined
+                    if (countyObject) {
+                        color = covidMap[date][layer.feature.properties.code].dailyColor
+                    }
+                    layer.setStyle({
+                        color,
+                        weight: 1
+                    })
+                }
+            })
+
+        }
+    </script>
+</body>
+
+</html>
