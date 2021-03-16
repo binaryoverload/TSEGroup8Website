@@ -76,8 +76,6 @@
         
         .map-container {
             position: relative;
-            display: inline-block;
-            width: 48%;
         }
         
         .progress-overlay {
@@ -109,25 +107,9 @@
 </head>
 
 <body>
-    <div class="map-container" id="cumulative-container">
-        <h1>Cumulative</h1>
-        <div class="map">
-            <div id="cumulative-map" class="map"></div>
-            <div class="progress-overlay">
-                <div class="progress-bar">
-                    <span style="width:0%"></span> </div>
-                <br/>
-                <div class="progress-label">&nbsp;Loading Data...</div>
-            </div>
-        </div>
-
-        <div class="overlay"> </div>
-    </div>
-
     <div class="map-container" id="daily-container">
-        <h1>Daily</h1>
         <div class="map">
-            <div id="daily-map" class="map"></div>
+            <div id="map" class="map"></div>
             <div class="progress-overlay">
                 <div class="progress-bar">
                     <span style="width:0%"></span> </div>
@@ -136,7 +118,8 @@
             </div>
         </div>
 
-        <div class="overlay"></div>
+        <div class="overlay" id="daily-overlay"></div>
+        <div class="overlay" id="cumulative-overlay"></div>
     </div>
 
 
@@ -144,6 +127,12 @@
     <p id="date"></p>
 
     <script src="static/map.js"></script>
+</body>
+
+</html>
+<p id="date"></p>
+
+<script src="static/map.js"></script>
 </body>
 
 </html>

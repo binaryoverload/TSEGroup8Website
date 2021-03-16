@@ -7,9 +7,8 @@ let dailyColorScale = [];
 let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6a", "#79146e", "#50046d", "#300061", "#0c0920"];
 
 (async function() {
-    window.cumulativeMap = L.map('cumulative-map').setView([54.898, -5.416], 6);
-    window.dailyMap = L.map('daily-map').setView([54.898, -5.416], 6);
-    let cumulativeTileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    window.map = L.map('map').setView([54.898, -5.416], 6);
+    let tileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>, <a href="https://coronavirus.data.gov.uk/details/interactive-map#:~:text=Attributions">Data and Boundaries © </a>',
         maxZoom: 18,
         id: 'mapbox/light-v10',
@@ -17,16 +16,8 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiYmluYXJ5b3ZlcmxvYWQiLCJhIjoiY2tsbXN2dDg5MGNlMDJvbXVicnN3Y2RxOSJ9.yCG6Sk6vz7qdhVT2gsWkpA'
     });
-    let dailyTileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>, <a href="https://coronavirus.data.gov.uk/details/interactive-map#:~:text=Attributions">Data and Boundaries © </a>',
-        maxZoom: 18,
-        id: 'mapbox/light-v10',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'pk.eyJ1IjoiYmluYXJ5b3ZlcmxvYWQiLCJhIjoiY2tsbXN2dDg5MGNlMDJvbXVicnN3Y2RxOSJ9.yCG6Sk6vz7qdhVT2gsWkpA'
-    });
-    cumulativeTileLayer.addTo(window.cumulativeMap);
-    dailyTileLayer.addTo(window.dailyMap);
+
+    tileLayer.addTo(window.map);
 
     let counties = await fetch("/static/countyCodes.json").then(data => data.json())
     let mapData = await fetch('https://coronavirus.data.gov.uk/downloads/maps/utla-ref.geojson').then(data => data.json())
@@ -123,7 +114,7 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
             max: cumulativeDeciles[i + 1] || Number.MAX_VALUE,
             color: colorScale[i]
         })
-        document.querySelector("#cumulative-container > .overlay").innerHTML += `<div class="overlay-percentile-${i + 1}"><span></span>${cumulativeDeciles[i]}${cumulativeDeciles[i + 1] ? " - " + cumulativeDeciles[i + 1] : "+"}</div>`
+        document.getElementById("cumulative-overlay").innerHTML += `<div class="overlay-percentile-${i + 1}"><span></span>${cumulativeDeciles[i]}${cumulativeDeciles[i + 1] ? " - " + cumulativeDeciles[i + 1] : "+"}</div>`
     }
 
     for (let i = 0; i < dailyDeciles.length; i++) {
@@ -132,7 +123,7 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
             max: dailyDeciles[i + 1] || Number.MAX_VALUE,
             color: colorScale[i]
         })
-        document.querySelector("#daily-container > .overlay").innerHTML += `<div class="overlay-percentile-${i + 1}"><span></span>${dailyDeciles[i]}${dailyDeciles[i + 1] ? " - " + dailyDeciles[i + 1] : "+"}</div>`
+        document.getElementById("daily-overlay").innerHTML += `<div class="overlay-percentile-${i + 1}"><span></span>${dailyDeciles[i]}${dailyDeciles[i + 1] ? " - " + dailyDeciles[i + 1] : "+"}</div>`
     }
 
     covidMap = covidLines.reduce((map, line) => {
@@ -154,15 +145,41 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
 
     dateUpdate(dateString)
 
-    let cumulativeGeoJson = L.geoJSON(mapData).bindTooltip(function(layer) {
+    let cumulativeGeoJson = L.geoJSON(mapData, { className: "cumulative-layers" }).bindTooltip(function(layer) {
         let covidData = covidMap[getSliderDateString(document.getElementById("slider").value)][layer.feature.properties.code]
         return counties[layer.feature.properties.code] + " (" + layer.feature.properties.code + ") - " + (covidData ? covidData.cumulative : "No Data");
-    }).addTo(window.cumulativeMap);
+    });
 
-    let dailyGeoJson = L.geoJSON(mapData).bindTooltip(function(layer) {
+    let dailyGeoJson = L.geoJSON(mapData, { className: "daily-layers" }).bindTooltip(function(layer) {
         let covidData = covidMap[getSliderDateString(document.getElementById("slider").value)][layer.feature.properties.code]
         return counties[layer.feature.properties.code] + " (" + layer.feature.properties.code + ") - " + (covidData ? covidData.daily : "No Data");
-    }).addTo(window.dailyMap);
+    })
+
+    cumulativeGeoJson.addTo(window.map);
+
+    const layerControls = L.control.layers({
+        "Cumulative Data": cumulativeGeoJson,
+        "Daily Data": dailyGeoJson
+    }, {}, { collapsed: false });
+    layerControls.addTo(window.map);
+
+    cumulativeGeoJson.on("add", function() {
+        document.getElementById("cumulative-overlay").style.display = ""
+        dateUpdate(getSliderDateString(document.getElementById("slider").value))
+    })
+
+    cumulativeGeoJson.on("remove", function() {
+        document.getElementById("cumulative-overlay").style.display = "none"
+    })
+
+    dailyGeoJson.on("add", function() {
+        document.getElementById("daily-overlay").style.display = ""
+        dateUpdate(getSliderDateString(document.getElementById("slider").value))
+    })
+
+    dailyGeoJson.on("remove", function() {
+        document.getElementById("daily-overlay").style.display = "none"
+    })
 
     dateUpdate(getSliderDateString(document.getElementById("slider").value))
 
@@ -202,26 +219,17 @@ function getGradientColor(number, colorScale) {
 
 function setStyles(date) {
 
-    window.cumulativeMap.eachLayer(function(layer) {
+    window.map.eachLayer(function(layer) {
+        console.log(layer)
         if (layer.setStyle && layer.feature) {
             let countyObject = covidMap[date][layer.feature.properties.code]
             let color = undefined
             if (countyObject) {
-                color = covidMap[date][layer.feature.properties.code].cumulativeColor
-            }
-            layer.setStyle({
-                color,
-                weight: 1
-            })
-        }
-    })
-
-    window.dailyMap.eachLayer(function(layer) {
-        if (layer.setStyle && layer.feature) {
-            let countyObject = covidMap[date][layer.feature.properties.code]
-            let color = undefined
-            if (countyObject) {
-                color = covidMap[date][layer.feature.properties.code].dailyColor
+                if (layer.options.className === "cumulative-layers") {
+                    color = covidMap[date][layer.feature.properties.code].cumulativeColor
+                } else if (layer.options.className === "daily-layers") {
+                    color = covidMap[date][layer.feature.properties.code].dailyColor
+                }
             }
             layer.setStyle({
                 color,
