@@ -1,12 +1,14 @@
 <!DOCTYPE html>
+<html lang="en">
+
 <html>
 
 <head>
-    <meta charset="utf-8">
+    
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TSE</title>
-
 
     <!-- bootstrap cdn -->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -18,8 +20,14 @@
 
     <!-- style.css -->
     <link rel="stylesheet" type="text/css" href="static/index.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <!-- jquery cdn -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+
 </head>
 
 
@@ -158,9 +166,49 @@
     <hr>
 
     <section id="S2" class="section1">Air Traffic Section</section>
+
     <hr>
-    <section id="S3" class="section2">UK Covid Section</section>
+
+    <!-- UK Covid Map -->
+    <section class="ukmap" id="ukmap">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-header">
+                        <h2>Overview Of UK COVID-19 Cases</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-container" id="daily-container">
+            <div class="map">
+                <div id="map" class="map"></div>
+                <div class="progress-overlay">
+                    <div class="progress-bar">
+                        <span style="width:0%"></span> </div>
+                        <br/>
+                        <div class="progress-label">&nbsp;Loading Data...</div>
+                    </div>
+            </div>
+
+                <div class="overlay" id="daily-overlay"></div>
+                <div class="overlay" id="cumulative-overlay"></div>
+        </div>
+
+
+            <input id="slider" type="range" min="0" max="335" width="100%">
+            <p id="date"></p>
+
+            <script src="static/map.js"></script>
+
+            <p id="date"></p>
+    </section>
+
     <hr>
+
     <section id="S4" class="section3">Raw Data Section</section>
 
 
@@ -181,8 +229,8 @@
     <!-- scripts -->
     <!-- bootstrap javascript cdn -->
     <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
     <script src="js/bootstrap.min.js"></script>
+    <script src="static/map.js"></script>
 
 </body>
 
