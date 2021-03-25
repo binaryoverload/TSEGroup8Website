@@ -4,28 +4,28 @@
 <html>
 
 <head>
-    
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TSE</title>
+	
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TSE</title>
 
-    <!-- bootstrap cdn -->
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-    <!-- font awesome cdn -->
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+	<!-- bootstrap cdn -->
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+	<!-- font awesome cdn -->
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/font-awesome.css">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/font-awesome.css">
 
-    <!-- style.css -->
-    <link rel="stylesheet" type="text/css" href="static/index.css" />
+	<!-- style.css -->
+	<link rel="stylesheet" type="text/css" href="static/index.css" />
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-    <!-- jquery cdn -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+	<!-- jquery cdn -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 
 </head>
@@ -33,205 +33,205 @@
 
 <body>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 navbar">
-                <a href="/" class="logo navbar-brand text-white offset-md-2">TSE GROUP 8</a>
-                <ul class="nav">
-                    <li class="nav-item active"><a href="#S1" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="#S2" class="nav-link">Air Traffic Data</a></li>
-                    <li class="nav-item"><a href="#S3" class="nav-link">UK Covid Data</a></li>
-                    <li class="nav-item"><a href="#S4" class="nav-link">Raw Data</a></li>
-                </ul>
-            </div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 navbar">
+				<a href="/" class="logo navbar-brand text-white offset-md-2">TSE GROUP 8</a>
+				<ul class="nav">
+					<li class="nav-item active"><a href="#S1" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="#S2" class="nav-link">Air Traffic Data</a></li>
+					<li class="nav-item"><a href="#ukmap" class="nav-link">UK Covid Data</a></li>
+					<li class="nav-item"><a href="#S4" class="nav-link">Raw Data</a></li>
+				</ul>
+			</div>
 
-            <!-- slider banner	 -->
+			<!-- slider banner	 -->
 
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
+			<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+				<ol class="carousel-indicators">
+					<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+					<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+					<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+				</ol>
 
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="info">
-                            <h1>Flights During Covid</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="info">
-                            <h1>View UK Covid Data</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="info">
-                            <h1>View Raw Data</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                        </div>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-    </div>
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<div class="info">
+							<h1>Flights During Covid</h1>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="info">
+							<h1>View UK Covid Data</h1>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="info">
+							<h1>View Raw Data</h1>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+						</div>
+					</div>
+				</div>
+				<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>
+	</div>
 
-    <section class="welcome" id="S1">
-        <div class="welcomeRow">
-            <div class="col50">
-                <h2 class="titleText"><span>W</span>elcome</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>Lorem ipsum dolor
-                    sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-            <div class="col50">
-                <div class="imgBx">
-                    <img src="static/images/pexels-lukas-669610.jpg">
-                </div>
-            </div>
-        </div>
-    </section>
+	<section class="welcome" id="S1">
+		<div class="welcomeRow">
+			<div class="col50">
+				<h2 class="titleText"><span>W</span>elcome</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+					aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>Lorem ipsum dolor
+				sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			</div>
+			<div class="col50">
+				<div class="imgBx">
+					<img src="static/images/pexels-lukas-669610.jpg">
+				</div>
+			</div>
+		</div>
+	</section>
 
-    <hr>
+	<hr>
 
-    <section class="components" id="components">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-header">
-                        <h2>View Components</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                    </div>
-                </div>
-            </div>
+	<section class="components" id="components">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-header">
+						<h2>View Components</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+					</div>
+				</div>
+			</div>
 
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="single-service">
-                        <div class="service-bg service-bg-1">
-                            <h2>Air Traffic Data</h2>
-                        </div>
-                        <div class="service-text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="single-service">
+						<div class="service-bg service-bg-1">
+							<h2>Air Traffic Data</h2>
+						</div>
+						<div class="service-text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
 
-                            <a href="" class="btn-area">View Air Traffic Data!<i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+							<a href="" class="btn-area">View Air Traffic Data!<i class="fa fa-long-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>
 
-                <div class="col-md-4">
-                    <div class="single-service">
-                        <div class="service-bg service-bg-2">
-                            <h2>UK Covid Data</h2>
-                        </div>
+				<div class="col-md-4">
+					<div class="single-service">
+						<div class="service-bg service-bg-2">
+							<h2>UK Covid Data</h2>
+						</div>
 
-                        <div class="service-text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+						<div class="service-text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
 
-                            <a href="" class="btn-area">View Covid Data!<i class="fa fa-long-arrow-right"></i></a>
+							<a href="" class="btn-area">View Covid Data!<i class="fa fa-long-arrow-right"></i></a>
 
-                        </div>
-                    </div>
-                </div>
+						</div>
+					</div>
+				</div>
 
-                <div class="col-md-4">
-                    <div class="single-service">
-                        <div class="service-bg service-bg-3">
-                            <h2>Raw Data</h2>
-                        </div>
-                        <div class="service-text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+				<div class="col-md-4">
+					<div class="single-service">
+						<div class="service-bg service-bg-3">
+							<h2>Raw Data</h2>
+						</div>
+						<div class="service-text">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
 
-                            <a href="" class="btn-area">View Raw Data!<i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+							<a href="" class="btn-area">View Raw Data!<i class="fa fa-long-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-    <hr>
+	<hr>
 
-    <section id="S2" class="section1">Air Traffic Section</section>
+	<section id="S2" class="section1">Air Traffic Section</section>
 
-    <hr>
+	<hr>
 
-    <!-- UK Covid Map -->
-    <section class="ukmap" id="ukmap">
+	<!-- UK Covid Map -->
+	<section class="ukmap" id="ukmap">
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-header">
-                        <h2>Overview Of UK COVID-19 Cases</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="section-header">
+						<h2>Overview Of UK COVID-19 Cases</h2>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <div class="map-container" id="daily-container">
-            <div class="map">
-                <div id="map" class="map"></div>
-                <div class="progress-overlay">
-                    <div class="progress-bar">
-                        <span style="width:0%"></span> </div>
-                        <br/>
-                        <div class="progress-label">&nbsp;Loading Data...</div>
-                    </div>
-            </div>
+		<div class="map-container" id="daily-container">
+			<div class="map">
+				<div id="map" class="map"></div>
+				<div class="progress-overlay">
+					<div class="progress-bar">
+						<span style="width:0%"></span> </div>
+						<br/>
+						<div class="progress-label">&nbsp;Loading Data...</div>
+					</div>
+				</div>
 
-                <div class="overlay" id="daily-overlay"></div>
-                <div class="overlay" id="cumulative-overlay"></div>
-        </div>
-
-
-            <input id="slider" type="range" min="0" max="335" width="100%">
-            <p id="date"></p>
-
-            <script src="static/map.js"></script>
-
-            <p id="date"></p>
-    </section>
-
-    <hr>
-
-    <section id="S4" class="section3">Raw Data Section</section>
+				<div class="overlay" id="daily-overlay"></div>
+				<div class="overlay" id="cumulative-overlay"></div>
+			</div>
 
 
+			<input id="slider" type="range" min="0" max="335" width="100%">
+			<p id="date"></p>
+
+			<script src="static/map.js"></script>
+
+			<p id="date"></p>
+		</section>
+
+		<hr>
+
+		<section id="S4" class="section3">Raw Data Section</section>
 
 
 
-    <footer class="sticky-footer">
-        <ul>
-            <li><a href="#S1">Home</a></li>
-            <li><a href="#S2">Air Traffic Data </a></li>
-            <li><a href="#S3">UK Covid Data</a></li>
-            <li><a href="#S4">Raw Data</a></li>
-        </ul>
-        <p> © Copyright University Of Lincoln.</p>
-    </footer>
 
 
-    <!-- scripts -->
-    <!-- bootstrap javascript cdn -->
-    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="static/map.js"></script>
+		<footer class="sticky-footer">
+			<ul>
+				<li><a href="#S1">Home</a></li>
+				<li><a href="#S2">Air Traffic Data </a></li>
+				<li><a href="#S3">UK Covid Data</a></li>
+				<li><a href="#S4">Raw Data</a></li>
+			</ul>
+			<p> © Copyright University Of Lincoln.</p>
+		</footer>
 
-</body>
 
-</html>
+		<!-- scripts -->
+		<!-- bootstrap javascript cdn -->
+		<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="static/map.js"></script>
+
+	</body>
+
+	</html>
