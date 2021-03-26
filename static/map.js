@@ -164,6 +164,7 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
     layerControls.addTo(window.map);
 
     cumulativeGeoJson.on("add", function() {
+        document.getElementById("map-type-label").innerText = "cumulative"
         document.getElementById("cumulative-overlay").style.display = ""
         dateUpdate(getSliderDateString(document.getElementById("slider").value))
     })
@@ -173,6 +174,7 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
     })
 
     dailyGeoJson.on("add", function() {
+        document.getElementById("map-type-label").innerText = "daily"
         document.getElementById("daily-overlay").style.display = ""
         dateUpdate(getSliderDateString(document.getElementById("slider").value))
     })
@@ -197,7 +199,7 @@ function getSliderDate(value) {
 }
 
 function dateUpdate(dateString) {
-    document.getElementById("date").innerText = dateString
+    document.getElementById("map-date-label").innerText = dateString
     setStyles(dateString)
 }
 
