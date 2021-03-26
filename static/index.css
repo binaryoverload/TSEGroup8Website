@@ -216,7 +216,7 @@ body {
     text-transform: uppercase;
 }
 
-section {
+.infoSection {
     padding: 100px;
 }
 
@@ -276,8 +276,7 @@ section#components.components {
     color: #000;
 }
 
-
-section#ukmap.ukmap{
+section#ukmap {
 	padding-top: 25px;
 	padding-bottom: 25px;
 }
