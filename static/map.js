@@ -63,9 +63,9 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
     let covidLines = window.covidData.map(line => {
         return {
             date: line[0],
-            countyCode: line[2],
-            cumulative: Number(line[4]),
-            daily: Number(line[5])
+            countyCode: line[1],
+            cumulative: Number(line[2]),
+            daily: Number(line[3])
         }
     })
 
@@ -147,12 +147,14 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
 
     let cumulativeGeoJson = L.geoJSON(mapData, { className: "cumulative-layers" }).bindTooltip(function(layer) {
         let covidData = covidMap[getSliderDateString(document.getElementById("slider").value)][layer.feature.properties.code]
-        return counties[layer.feature.properties.code] + " (" + layer.feature.properties.code + ") - " + (covidData ? covidData.cumulative : "No Data");
+        let countyCode = layer.feature.properties.code
+        return counties[countyCode] + " (" + countyCode + ") - " + (covidData ? covidData.cumulative : "No Data");
     });
 
     let dailyGeoJson = L.geoJSON(mapData, { className: "daily-layers" }).bindTooltip(function(layer) {
         let covidData = covidMap[getSliderDateString(document.getElementById("slider").value)][layer.feature.properties.code]
-        return counties[layer.feature.properties.code] + " (" + layer.feature.properties.code + ") - " + (covidData ? covidData.daily : "No Data");
+        let countyCode = layer.feature.properties.code
+        return counties[countyCode] + " (" + countyCode + ") - " + (covidData ? covidData.daily : "No Data");
     })
 
     cumulativeGeoJson.addTo(window.map);
@@ -222,7 +224,6 @@ function getGradientColor(number, colorScale) {
 function setStyles(date) {
 
     window.map.eachLayer(function(layer) {
-        console.log(layer)
         if (layer.setStyle && layer.feature) {
             let countyObject = covidMap[date][layer.feature.properties.code]
             let color = undefined
