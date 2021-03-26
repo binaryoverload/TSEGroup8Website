@@ -43,7 +43,7 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
         document.querySelectorAll(".progress-bar span").forEach(n => n.setAttribute("style", `width: ${(receivedLength / totalLength) * 100}%`))
         document.querySelectorAll(".progress-overlay .progress-label").forEach(n => n.innerHTML = `&nbsp;Loading data ${Math.floor((receivedLength / totalLength) * 100)}%...`)
 
-        console.log(`Received ${receivedLength} of ${totalLength}`)
+        console.log(`Received ${receivedLength} of ${totalLength} (${Math.floor((receivedLength / totalLength) * 100)}% downloaded)`)
     }
 
     document.querySelectorAll(".progress-overlay").forEach(n => n.remove())
