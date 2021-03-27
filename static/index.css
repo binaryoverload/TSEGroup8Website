@@ -82,21 +82,21 @@ body {
     height: 100%;
     width: 100%;
     background: url('images/airport-690556.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
 #carouselExampleIndicators .carousel-inner .carousel-item:nth-child(2) {
     background: url('images/virus-4937553.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 
 #carouselExampleIndicators .carousel-inner .carousel-item:nth-child(3) {
     background: url('images/graph-2588994_1920.jpg');
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
