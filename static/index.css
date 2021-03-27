@@ -216,10 +216,6 @@ body {
     text-transform: uppercase;
 }
 
-.infoSection {
-    padding: 100px;
-}
-
 section#components.components {
     padding-top: 25px;
 }
@@ -274,11 +270,6 @@ section#components.components {
     text-transform: uppercase;
     font-weight: 700;
     color: #000;
-}
-
-section#ukmap {
-    padding-top: 25px;
-    padding-bottom: 25px;
 }
 
 .map {
