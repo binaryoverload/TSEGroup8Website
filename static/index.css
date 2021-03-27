@@ -376,44 +376,84 @@ section#ukmap {
     display: inline-block;
 }
 
-footer p {
-    padding: 0;
-    font-size: 0.8em;
-    color: hsla(0, 50%, 100%, 0.35);
-    margin: 1em 0;
-    font-size: 1rem;
-}
-
-footer ul {
-    list-style: none;
-    display: flex;
-    margin: 1em 0;
-}
-
-footer ul li a {
-    padding: 1em;
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.904);
-    transition: 100ms;
-}
-
-footer ul li a:hover {
-    color: var(--primary);
-}
-
 footer {
+    position: relative;
     width: 100%;
-    background: #000000;
+    height: auto;
+    background: #111;
     color: #fff;
-    display: grid;
-    place-items: center;
-    padding: 2em;
-    font-size: 1.2rem;
+    display: flex;
+    padding: 50px 100px;
+    justify-content:: space-between;
 }
 
-.sticky-footer {
-    position: sticky;
-    top: 100%;
+footer .container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction:row;
+}
+
+footer .container .sec{
+    margin-right: 30px;
+}
+
+footer .container .sec.about{
+    width: 40%;
+}
+
+footer .container h2{
+    position: relative;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+footer .container h2:before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #ffffff;
+}
+
+footer .container .sec.about p{
+    color: #999;
+}
+
+.quickLinks{
+    position: relative;
+    width: 25%;
+}
+
+.quickLinks ul li{
+    list-style: none;
+}
+
+.quickLinks ul li a{
+    color: #999;
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.quickLinks ul li a:hover{
+    color: #fff;
+}
+
+footer .container .sec.team p{
+    color: #999;
+    font-size: 0.90em;
+}
+
+.copyrightText{
+    width: 100%;
+    background: #181818;
+    padding: 8px 100px;
+    text-align: center;
+    color: #999;
 }
 
 #map-background-container {
@@ -424,6 +464,43 @@ footer {
 #map-controls {
     margin-bottom: 1em;
 }
+
+@media (max-width: 991px){
+    .welcomeRow {
+        flex-direction: column;
+    }
+
+   .welcomeRow .col50 {
+    position: relative;
+    width: 100%;
+    }
+
+    .row .col50 .imgBx{
+       height: 300px;
+       margin-top: 20px;
+    }
+
+    footer{
+        padding: 40px;
+    }
+    footer .container{
+        flex-direction: column;
+    }
+    footer .container .sec{
+        margin-right: 0;
+        margin-bottom: 40px;
+    }
+    footer .container .sec.about,
+    .quickLinks{
+        width: 100%;
+    }
+    .copyrightText{
+    padding: 8px 40px;
+    }
+}
+
+
+
 
 @media (max-width: 500px) {
     #map-background-container {
