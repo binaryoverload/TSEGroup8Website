@@ -224,21 +224,19 @@ section#components.components {
     object-fit: cover;
 }
 
-.section1,
-.section2,
-.section3 {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 5em;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: #000;
-}
-
 .map {
     height: 85vh;
+}
+
+input {
+    padding: 0.25em 0.5em;
+    background: white;
+    border: #000 2px solid;
+    max-width: none;
+}
+
+input[type="date"] {
+    width: fit-content;
 }
 
 .overlay {

@@ -167,23 +167,39 @@
 
     <hr>
 
-    <section id="atc-section" class="container section1">Air Traffic Section</section>
+    <section id="atc-section" class="container section1">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-header">
+                    <h2>Air Traffic Control Data</h2>
+                    <p>The data below shows incoming flights coming into UK airports </p>
+                    <p>The data is for the dates <strong>31/01/2020</strong> until <strong>31/12/2020</strong> inclusive.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <input id="atc-date-input" type="date" min="2020-01-31" max="2020-12-31">
+                <p>The flights will be displayed for <strong><span id="atc-date-output">2020-mm-dd</span></strong></p>
+            </div>
+        </div>
+
+    </section>
 
     <hr>
 
     <!-- UK Covid Map -->
     <section class="container ukmap" id="covid-map-section">
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-header">
-                        <h2>Overview Of UK COVID-19 Cases</h2>
-                        <p>The map below shows a visual representation of COVID-19 cases. You can switch between <strong>daily</strong> (The figures for that one specific day) or <strong>cumulative</strong> (The total number of cases in that region so far)
-                            figures.
-                        </p>
-                        <p>The data is for the dates <strong>31/01/2020</strong> until <strong>31/12/2020</strong> inclusive.</p>
-                    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-header">
+                    <h2>Overview Of UK COVID-19 Cases</h2>
+                    <p>The map below shows a visual representation of COVID-19 cases. You can switch between <strong>daily</strong> (The figures for that one specific day) or <strong>cumulative</strong> (The total number of cases in that region so far) figures.
+                    </p>
+                    <p>The data is for the dates <strong>31/01/2020</strong> until <strong>31/12/2020</strong> inclusive.</p>
                 </div>
             </div>
         </div>
@@ -226,6 +242,11 @@
                 <div class="section-header">
                     <h2>Attributions</h2>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <h3>Data</h3>
                 <ul>
                     <li>Contains MSOA names &copy; Open Parliament copyright and database right 2020</li>
                     <li>Contains Ordnance Survey data &copy; Crown copyright and database right 2020</li>
@@ -234,6 +255,16 @@
                     <li>Office for National Statistics licensed under the Open Government Licence v.3.0</li>
                     <li>Map data &copy; OpenStreetMap contributors</li>
                     <li>Map imagery &copy; Mapbox</li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h3>Libraries</h3>
+                <ul>
+                    <li><a href="https://getbootstrap.com/">Bootstrap 4</a></li>
+                    <li><a href="https://jquery.com/">jQuery</a></li>
+                    <li><a href="https://leafletjs.com/">Leaflet</a></li>
+                    <li></li>
+                    <li></li>
                 </ul>
             </div>
         </div>
@@ -279,7 +310,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-    <script src="static/map.js"></script>
+    <script src="static/js/map.js"></script>
+    <script src="static/js/atc.js"></script>
 
 </body>
 
