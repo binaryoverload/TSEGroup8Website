@@ -100,7 +100,6 @@ body {
 .section-header {
     text-align: center;
     margin-bottom: 30px;
-    margin-top: 15px;
 }
 
 .section-header p {
@@ -239,7 +238,7 @@ section#components.components {
 }
 
 .map {
-    height: 100vh;
+    height: 85vh;
 }
 
 .overlay {
