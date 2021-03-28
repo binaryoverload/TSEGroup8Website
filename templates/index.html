@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TSE</title>
 
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 
@@ -25,18 +25,32 @@
 
 <body>
 
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <span class="navbar-brand">TSE Group 8</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#atc-section">ATC Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#covid-map-section">COVID-19 Interactive Map</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#raw-data-section">Raw Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#attributions-section">Attributions</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 navbar">
-                <a href="/" class="logo navbar-brand text-white offset-md-2">TSE GROUP 8</a>
-                <ul class="nav">
-                    <li class="nav-item active"><a href="#S1" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="#S2" class="nav-link">Air Traffic Data</a></li>
-                    <li class="nav-item"><a href="#ukmap" class="nav-link">UK Covid Data</a></li>
-                    <li class="nav-item"><a href="#S4" class="nav-link">Raw Data</a></li>
-                </ul>
-            </div>
-
             <!-- slider banner	 -->
 
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -153,12 +167,12 @@
 
     <hr>
 
-    <section id="S2" class="container section1">Air Traffic Section</section>
+    <section id="atc-section" class="container section1">Air Traffic Section</section>
 
     <hr>
 
     <!-- UK Covid Map -->
-    <section class="container ukmap" id="ukmap">
+    <section class="container ukmap" id="covid-map-section">
 
         <div class="container-fluid">
             <div class="row">
@@ -202,11 +216,11 @@
 
     <hr>
 
-    <section id="S4" class="container section3">Raw Data Section</section>
+    <section id="raw-data-section" class="container section3">Raw Data Section</section>
 
     <hr>
 
-    <section id="S5" class="container">
+    <section id="attributions-section" class="container mb-3">
         <div class="row">
             <div class="col-md-12">
                 <div class="section-header">
@@ -254,8 +268,8 @@
 
     <!-- scripts -->
     <!-- bootstrap javascript cdn -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <script src="static/map.js"></script>
 
