@@ -7,10 +7,13 @@ let dailyColorScale = [];
 let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6a", "#79146e", "#50046d", "#300061", "#0c0920"];
 
 (async function() {
-    window.map = L.map('map').setView([54.898, -5.416], 6);
+    window.map = L.map('map', {
+        maxBounds: L.latLngBounds(L.latLng(62, 5.5), L.latLng(49, -17)),
+    }).setView([54.898, -5.416], 6);
     let tileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>, <a href="https://coronavirus.data.gov.uk/details/interactive-map#:~:text=Attributions">Data and Boundaries © </a>',
-        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>, <a href="https://coronavirus.data.gov.uk/details/interactive-map#:~:text=Attributions">Data and Boundaries &copy; </a>',
+        maxZoom: 10,
+        minZoom: 6,
         id: 'mapbox/light-v10',
         tileSize: 512,
         zoomOffset: -1,
