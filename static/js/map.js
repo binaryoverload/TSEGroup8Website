@@ -22,7 +22,7 @@ let colorScale = ["#fcde95", "#fc9860", "#f5614b", "#dc3852", "#ba2760", "#941b6
 
     tileLayer.addTo(window.map);
 
-    let counties = await fetch("/static/countyCodes.json").then(data => data.json())
+    let counties = await fetch("/countyCodes").then(data => data.json())
     let mapData = await fetch('https://coronavirus.data.gov.uk/downloads/maps/utla-ref.geojson').then(data => data.json())
         // let mapData = await fetch('https://coronavirus.data.gov.uk/downloads/maps/utla_data_latest.geojson').then(data => data.json())
 
