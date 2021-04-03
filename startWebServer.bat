@@ -1,3 +1,4 @@
 @ECHO OFF
 set FLASK_ENV=development
-python app.py
+set FLASK_APP=.
+flask run
