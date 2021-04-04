@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: #ccc;
+    background: #eee;
 }
 
 
@@ -228,11 +228,13 @@ section#components.components {
     height: 85vh;
 }
 
-input {
+input,
+select {
     padding: 0.25em 0.5em;
     background: white;
     border: #000 2px solid;
     max-width: none;
+    height: 2.5rem;
 }
 
 input[type="date"] {
