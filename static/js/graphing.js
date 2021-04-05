@@ -6,24 +6,68 @@ const chart = new Chart(ctx, {
             legend: {
                 position: "right"
             }
+        },
+        scales: {
+            covid_cases_cum: {
+                axis: "y",
+                title: {
+                    display: true,
+                    text: "Cumulative COVID Cases"
+                },
+                backgroundColor: "#ff968a55",
+                type: "linear",
+                display: "auto"
+            },
+            covid_cases_daily: {
+                axis: "y",
+                title: {
+                    display: true,
+                    text: "Daily COVID Cases"
+                },
+                backgroundColor: "#55cbcd55",
+                type: "linear",
+                display: "auto"
+            },
+            flights: {
+                axis: "y",
+                title: {
+                    display: true,
+                    text: "Daily Flights"
+                },
+                backgroundColor: "#ffcba255",
+                type: "linear",
+                display: "auto"
+            }
         }
     },
     data: {
         labels: [],
         datasets: [{
                 label: 'Covid Cases Cumulative',
+                yAxisID: "covid_cases_cum",
                 data: [],
-                borderColor: "#ff0000",
-                backgroundColor: "#ff000022",
+                borderColor: "#ff968a",
+                backgroundColor: "#ff968a22",
+                tension: 0.4,
+                fill: true,
+                hidden: false
+            },
+            {
+                label: 'Covid Cases Daily',
+                yAxisID: "covid_cases_daily",
+                data: [],
+                borderColor: "#55cbcd",
+                backgroundColor: "#55cbcd22",
                 tension: 0.4,
                 fill: true,
                 hidden: true
             },
             {
-                label: 'Covid Cases Daily',
+                label: 'Flights',
+                yAxisID: "flights",
                 data: [],
-                borderColor: "#ff0000",
-                backgroundColor: "#ff000022",
+                borderColor: "#ffcba2",
+                backgroundColor: "#ffcba222",
                 tension: 0.4,
                 fill: true,
                 hidden: true
