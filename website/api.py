@@ -9,8 +9,15 @@ from website.utils import docache
 
 @app.route('/counties', methods=['GET'])
 @docache(minutes=60*24*5) # Cache for 5 days since this will not change!
-def countyCodes():
+def countyNames():
     return json.dumps(counties)
+
+@app.route('/counties/<county>', methods=['GET'])
+@docache(minutes=60*24*5) # Cache for 5 days since this will not change!
+def countyName(county):
+    if not county in counties:
+        abort(404, description="County not found")
+    return counties[county]
 
 @app.route('/counties/list', methods=['GET'])
 @docache(minutes=60*24*5) # Cache for 5 days since this will not change!
