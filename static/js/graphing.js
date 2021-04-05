@@ -80,6 +80,11 @@ const chart = new Chart(ctx, {
 //     document.getElementById("graphing-date-output").innerText = e.target.value
 // });
 
+function convertDateToJSDate(inputDate) {
+    let dateParts = inputDate.split("/");
+    return new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+}
+
 (async function() {
     const counties = await fetch("/counties").then(r => r.json())
     const select = document.getElementById("graphing-county-input")
@@ -95,14 +100,10 @@ const chart = new Chart(ctx, {
 function chartUpdate(county) {
     fetch("/covid/" + county).then(r => r.text()).then(t => {
         let lines = t.split("\n")
-        console.log(lines)
         const sortedLines = lines.sort((a, b) => {
-            let aParts = a.split(",")[0].split("/");
-            let bParts = b.split(",")[0].split("/");
-            let aDate = new Date(+aParts[2], aParts[1] - 1, +aParts[0]);
-            let bDate = new Date(+bParts[2], bParts[1] - 1, +bParts[0]);
-            console.log(aDate)
-            console.log(bDate)
+            let aDate = convertDateToJSDate(a.split(",")[0]);
+            let bDate = convertDateToJSDate(b.split(",")[0]);
+
             return aDate - bDate;
         })
         const dates = sortedLines.map(line => line.split(",")[0])
