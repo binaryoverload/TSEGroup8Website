@@ -11,14 +11,24 @@ const chart = new Chart(ctx, {
     data: {
         labels: [],
         datasets: [{
-            label: 'Covid Cases',
-            data: [],
-            borderColor: "#ff0000",
-            backgroundColor: "#ff000022",
-            tension: 0.4,
-            fill: true,
-            hidden: true
-        }]
+                label: 'Covid Cases Cumulative',
+                data: [],
+                borderColor: "#ff0000",
+                backgroundColor: "#ff000022",
+                tension: 0.4,
+                fill: true,
+                hidden: true
+            },
+            {
+                label: 'Covid Cases Daily',
+                data: [],
+                borderColor: "#ff0000",
+                backgroundColor: "#ff000022",
+                tension: 0.4,
+                fill: true,
+                hidden: true
+            }
+        ]
     }
 });
 
@@ -52,9 +62,11 @@ function chartUpdate(county) {
             return aDate - bDate;
         })
         const dates = sortedLines.map(line => line.split(",")[0])
-        const values = sortedLines.map(line => line.split(",")[2])
+        const cumulative = sortedLines.map(line => line.split(",")[2])
+        const daily = sortedLines.map(line => line.split(",")[3])
         chart.data.labels = dates
-        chart.data.datasets[0].data = values
+        chart.data.datasets[0].data = cumulative
+        chart.data.datasets[1].data = daily
         chart.update()
     });
 }
