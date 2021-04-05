@@ -228,13 +228,22 @@ section#components.components {
     height: 85vh;
 }
 
-input,
+input[type="text"],
 select {
     padding: 0.25em 0.5em;
     background: white;
     border: #000 2px solid;
     max-width: none;
     height: 2.5rem;
+}
+
+label {
+    margin-right: 2em;
+    font-size: 1.125rem;
+}
+
+legend {
+    font-weight: bold;
 }
 
 input[type="date"] {
