@@ -2,9 +2,12 @@ const ctx = document.getElementById('graph');
 const chart = new Chart(ctx, {
     type: 'line',
     options: {
+        animation: {
+            duration: 250
+        },
         plugins: {
             legend: {
-                position: "right"
+                position: "top"
             }
         },
         scales: {
@@ -12,7 +15,7 @@ const chart = new Chart(ctx, {
                 axis: "y",
                 title: {
                     display: true,
-                    text: "Cumulative COVID Cases"
+                    text: "Cumulative COVID-19 Cases"
                 },
                 backgroundColor: "#ff968a55",
                 type: "linear",
@@ -22,7 +25,7 @@ const chart = new Chart(ctx, {
                 axis: "y",
                 title: {
                     display: true,
-                    text: "Daily COVID Cases"
+                    text: "Daily COVID-19 Cases"
                 },
                 backgroundColor: "#55cbcd55",
                 type: "linear",
@@ -43,7 +46,7 @@ const chart = new Chart(ctx, {
     data: {
         labels: [],
         datasets: [{
-                label: 'Covid Cases Cumulative',
+                label: 'Cumulative COVID-19 Cases',
                 yAxisID: "covid_cases_cum",
                 data: [],
                 borderColor: "#ff968a",
@@ -53,7 +56,7 @@ const chart = new Chart(ctx, {
                 hidden: false
             },
             {
-                label: 'Covid Cases Daily',
+                label: 'Daily COVID-19 Cases',
                 yAxisID: "covid_cases_daily",
                 data: [],
                 borderColor: "#55cbcd",
@@ -63,7 +66,7 @@ const chart = new Chart(ctx, {
                 hidden: true
             },
             {
-                label: 'Flights',
+                label: 'Daily Flights',
                 yAxisID: "flights",
                 data: [],
                 borderColor: "#ffcba2",
@@ -106,7 +109,7 @@ function chartUpdate(county) {
 
             return aDate - bDate;
         })
-        const dates = sortedLines.map(line => line.split(",")[0])
+        const dates = sortedLines.map(line => line.split(",")[0].replace(/\//g, "-"))
         const cumulative = sortedLines.map(line => line.split(",")[2])
         const daily = sortedLines.map(line => line.split(",")[3])
         chart.data.labels = dates
