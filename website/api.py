@@ -33,7 +33,7 @@ def countyList():
 def covidCounty(county):
     return "\n".join(map(lambda row: ",".join(row), covidByCountyData[county]))
     
-@app.route("/covid", methods=['GET'])
+@app.route("/covid/totals", methods=['GET'])
 @docache(minutes=60*24*5, content_type='text/plain; charset=utf-8') # Cache for 5 days since this will not change!
 def covidTotals():
     return "\n".join(map(lambda row: ",".join(row), covidTotalsData))
@@ -45,7 +45,7 @@ def flightCounty(county):
         abort(404, description="County not found")
     return "\n".join(map(lambda row: ",".join(row), flightsByCountyData[county]))
     
-@app.route("/flights", methods=['GET'])
+@app.route("/flights/totals", methods=['GET'])
 @docache(minutes=60*24*5, content_type='text/plain; charset=utf-8') # Cache for 5 days since this will not change!
 def flightTotals():
     return "\n".join(map(lambda row: ",".join(row), flightsTotalsData.items()))
