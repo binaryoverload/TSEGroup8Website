@@ -28,25 +28,29 @@ def countyName(county):
 def countyList():
     return json.dumps(list(counties.keys()))
 
+# Content type for plain text
+# Using `text/plain` instead of `text/css` so it can be viewed in the browser for debugging
+plainContentType = "text/plain; charset=utf-8"
+
 @app.route("/covid/<county>", methods=['GET'])
-@docache(minutes=60*24*5, content_type='text/plain; charset=utf-8') # Cache for 5 days since this will not change!
+@docache(minutes=60*24*5, content_type=plainContentType) # Cache for 5 days since this will not change!
 def covidCounty(county):
     return "\n".join(map(lambda row: ",".join(row), covidByCountyData[county]))
     
 @app.route("/covid/totals", methods=['GET'])
-@docache(minutes=60*24*5, content_type='text/plain; charset=utf-8') # Cache for 5 days since this will not change!
+@docache(minutes=60*24*5, content_type=plainContentType) # Cache for 5 days since this will not change!
 def covidTotals():
     return "\n".join(map(lambda row: ",".join(row), covidTotalsData))
 
 @app.route("/flights/<county>", methods=['GET'])
-@docache(minutes=60*24*5, content_type='text/plain; charset=utf-8') # Cache for 5 days since this will not change!
+@docache(minutes=60*24*5, content_type=plainContentType) # Cache for 5 days since this will not change!
 def flightCounty(county):
     if not county in flightsByCountyData:
         abort(404, description="County not found")
     return "\n".join(map(lambda row: ",".join(row), flightsByCountyData[county]))
     
 @app.route("/flights/totals", methods=['GET'])
-@docache(minutes=60*24*5, content_type='text/plain; charset=utf-8') # Cache for 5 days since this will not change!
+@docache(minutes=60*24*5, content_type=plainContentType) # Cache for 5 days since this will not change!
 def flightTotals():
     return "\n".join(map(lambda row: ",".join(row), flightsTotalsData.items()))
 
