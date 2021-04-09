@@ -5,6 +5,10 @@ from flask import abort, Response
 
 from website import app
 from website.data import countyCodes as counties
+from website.data import covidTotals as covidTotalsData
+from website.data import covidByCounty as covidByCountyData
+from website.data import flightsByCounty as flightsByCountyData
+from website.data import flightsTotals as flightsTotalsData
 from website.utils import docache
 
 @app.route('/counties', methods=['GET'])
@@ -25,11 +29,26 @@ def countyList():
     return json.dumps(list(counties.keys()))
 
 @app.route("/covid/<county>", methods=['GET'])
+@docache(minutes=60*24*5, content_type='text/plain; charset=utf-8') # Cache for 5 days since this will not change!
 def covidCounty(county):
-    with open("C:/Users/willi/Documents/Coding/TSE/TSEGroup8Website/static/covid-data.csv", "r") as covidFile:
-        next(covidFile)
-        return "".join(filter(lambda line: county in line, covidFile.readlines()))
+    return "\n".join(map(lambda row: ",".join(row), covidByCountyData[county]))
     
+@app.route("/covid", methods=['GET'])
+@docache(minutes=60*24*5, content_type='text/plain; charset=utf-8') # Cache for 5 days since this will not change!
+def covidTotals():
+    return "\n".join(map(lambda row: ",".join(row), covidTotalsData))
+
+@app.route("/flights/<county>", methods=['GET'])
+@docache(minutes=60*24*5, content_type='text/plain; charset=utf-8') # Cache for 5 days since this will not change!
+def flightCounty(county):
+    if not county in flightsByCountyData:
+        abort(404, description="County not found")
+    return "\n".join(map(lambda row: ",".join(row), flightsByCountyData[county]))
+    
+@app.route("/flights", methods=['GET'])
+@docache(minutes=60*24*5, content_type='text/plain; charset=utf-8') # Cache for 5 days since this will not change!
+def flightTotals():
+    return "\n".join(map(lambda row: ",".join(row), flightsTotalsData.items()))
 
 
     # if not county in counties.keys():
