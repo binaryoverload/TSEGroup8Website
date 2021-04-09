@@ -18,3 +18,8 @@ def docache(minutes=5, content_type='application/json; charset=utf-8'):
             return rsp
         return wrapped_f
     return fwrap
+
+# Takes a date in the format dd/mm/yyyy and converts it to a python datetime
+def dateToDatetime(date):
+    day, month, year = map(lambda datePart: int(datePart), date.split("/"))
+    return datetime(year, month, day)
