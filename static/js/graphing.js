@@ -53,7 +53,7 @@ const chart = new Chart(ctx, {
                 backgroundColor: "#ff968a22",
                 tension: 0.4,
                 fill: true,
-                hidden: false
+                hidden: true
             },
             {
                 label: 'Daily COVID-19 Cases',
@@ -63,7 +63,7 @@ const chart = new Chart(ctx, {
                 backgroundColor: "#55cbcd22",
                 tension: 0.4,
                 fill: true,
-                hidden: true
+                hidden: false
             },
             {
                 label: 'Daily Flights',
@@ -101,20 +101,54 @@ function convertDateToJSDate(inputDate) {
 })()
 
 function chartUpdate(county) {
-    fetch("/covid/" + county).then(r => r.text()).then(t => {
-        let lines = t.split("\n")
-        const sortedLines = lines.sort((a, b) => {
-            let aDate = convertDateToJSDate(a.split(",")[0]);
-            let bDate = convertDateToJSDate(b.split(",")[0]);
+    let covidPromise = (county === "all" ? fetch("/covid/totals") : fetch("/covid/" + county)).then(r => {
+        if (r.ok) return r.text()
+        return ""
+    });
 
-            return aDate - bDate;
+    let flightPromise = (county === "all" ? fetch("/flights/totals") : fetch("/flights/" + county)).then(r => {
+        if (r.ok) return r.text()
+        return ""
+    });
+
+    Promise.all([covidPromise, flightPromise]).then(responses => {
+
+        let [covidData, flightData] = responses;
+
+        const dates = []
+
+        for (let d = new Date(2020, 0, 31); d <= new Date(2020, 11, 31); d.setDate(d.getDate() + 1)) {
+            dates.push(`${(d.getDate()+"").padStart(2, 0)}/${(d.getMonth() + 1 +"").padStart(2, 0)}/${d.getFullYear()}`)
+        }
+
+        const cumulative = {}
+        const daily = {}
+        covidData.split("\n").forEach(row => {
+            splitRow = row.split(",")
+            cumulative[splitRow[0]] = +splitRow[1]
+            daily[splitRow[0]] = +splitRow[2]
+        });
+
+        const flights = {}
+        flightData.split("\n").forEach(row => {
+            splitRow = row.split(",")
+            flights[splitRow[0]] = +splitRow[1]
         })
-        const dates = sortedLines.map(line => line.split(",")[0].replace(/\//g, "-"))
-        const cumulative = sortedLines.map(line => line.split(",")[2])
-        const daily = sortedLines.map(line => line.split(",")[3])
+
+        let cumulativeData = []
+        let dailyData = []
+        let flightsData = []
+        for (let date of dates) {
+            cumulativeData.push(cumulative[date] || undefined)
+            dailyData.push(daily[date] || undefined)
+            flightsData.push(flights[date] || undefined)
+        }
+
         chart.data.labels = dates
-        chart.data.datasets[0].data = cumulative
-        chart.data.datasets[1].data = daily
+        chart.data.datasets[0].data = cumulativeData
+        chart.data.datasets[1].data = dailyData
+        chart.data.datasets[2].data = flightsData
+
         chart.update()
     });
 }
