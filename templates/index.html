@@ -159,7 +159,73 @@
 
     <hr>
 
-    <section id="raw-data-section" class="container section3">Raw Data Section</section>
+    <section id="raw-data-section" class="container section3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-header">
+                    <h2>Data Access</h2>
+                    <p>The table below will display raw data for either flight data or COVID-19 data. </p>
+                    <p>The data is for the dates <strong>31/01/2020</strong> until <strong>31/12/2020</strong> inclusive.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="data-type-inputs" class="col-md-12 mb-2">
+                <label for="data-type-input">Data Type:</label>
+                <select id="data-type-input">
+                    <option value="covid">COVID-19 Data</option>
+                    <option value="flights">Flight Data</option>
+                </select>
+            </div>
+            <div id="data-county-inputs" class="col-md-6 mb-2 d-none">
+                <label for="data-county-input">County:</label>
+                <select id="data-county-input">
+                    <option value="null">--</option>
+                </select>
+            </div>
+            <div id="data-date-inputs" class="col-md-6 mb-2">
+                <label for="data-date-input">Date:</label>
+                <input type="date" id="data-date-input" min="2020-01-31" max="2020-12-31">
+            </div>
+
+        </div>
+        <div id="flight-data-table" class="row table-container">
+            <table>
+                <thead>
+                    <th>ICAO24</th>
+                    <th>First Seen</th>
+                    <th>Last Seen</th>
+                    <th>Callsign</th>
+                    <th>Est Departure Airport</th>
+                    <th>Est Arrival Airport</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="covid-data-table" class="row table-container">
+            <table>
+                <thead>
+                    <th>County</th>
+                    <th>Cumulative Cases</th>
+                    <th>New Cases &#9650;</th>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <hr>
+
+    <section id="data-comments-section" class="container mb-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-header">
+                    <h2>Data Conclusions</h2>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <hr>
 
@@ -239,6 +305,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <script src="static/js/main.js"></script>
     <script src="static/js/map.js"></script>
     <script src="static/js/graphing.js"></script>
 

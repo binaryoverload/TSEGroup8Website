@@ -62,12 +62,48 @@ body {
 }
 
 input[type="text"],
+input[type="date"],
 select {
     padding: 0.25em 0.5em;
     background: white;
     border: #000 2px solid;
     max-width: none;
     height: 2.5rem;
+    outline: none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#covid-data-table thead,
+#covid-data-table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+#flight-data-table thead,
+#flight-data-table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.table-container {
+    overflow-x: scroll;
+    overflow-y: scroll;
+    max-height: 90vh;
+}
+
+th,
+td {
+    padding: 8px 16px;
+}
+
+th {
+    background: #eee;
 }
 
 label {

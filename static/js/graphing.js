@@ -88,18 +88,6 @@ function convertDateToJSDate(inputDate) {
     return new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
 }
 
-(async function() {
-    const counties = await fetch("/counties").then(r => r.json())
-    const select = document.getElementById("graphing-county-input")
-    for (let county of Object.keys(counties)) {
-        const opt = document.createElement("option")
-        opt.value = county
-        opt.innerText = counties[county]
-        select.appendChild(opt)
-    }
-    chartUpdate(document.getElementById("graphing-county-input").value)
-})()
-
 function chartUpdate(county) {
     let covidPromise = (county === "all" ? fetch("/covid/totals") : fetch("/covid/" + county)).then(r => {
         if (r.ok) return r.text()
@@ -152,6 +140,8 @@ function chartUpdate(county) {
         chart.update()
     });
 }
+
+chartUpdate(document.getElementById("graphing-county-input").value)
 
 document.getElementById("graphing-county-input").addEventListener("change", function(e) {
     chartUpdate(e.target.value)
