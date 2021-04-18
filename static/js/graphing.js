@@ -89,12 +89,12 @@ function convertDateToJSDate(inputDate) {
 }
 
 function chartUpdate(county) {
-    let covidPromise = (county === "all" ? fetch("/covid/totals") : fetch("/covid/" + county)).then(r => {
+    let covidPromise = (county === "all" ? fetch("/covid/summary/all") : fetch("/covid/summary/" + county)).then(r => {
         if (r.ok) return r.text()
         return ""
     });
 
-    let flightPromise = (county === "all" ? fetch("/flights/totals") : fetch("/flights/" + county)).then(r => {
+    let flightPromise = (county === "all" ? fetch("/flights/summary/all") : fetch("/flights/summary/" + county)).then(r => {
         if (r.ok) return r.text()
         return ""
     });
