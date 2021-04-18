@@ -177,41 +177,58 @@
                     <option value="flights">Flight Data</option>
                 </select>
             </div>
-            <div id="data-county-inputs" class="col-md-6 mb-2 d-none">
-                <label for="data-county-input">County:</label>
-                <select id="data-county-input">
-                    <option value="null">--</option>
-                </select>
-            </div>
             <div id="data-date-inputs" class="col-md-6 mb-2">
                 <label for="data-date-input">Date:</label>
                 <input type="date" id="data-date-input" min="2020-01-31" max="2020-12-31">
             </div>
+            <div id="data-county-inputs" class="col-md-6 mb-2 d-none">
+                <label for="data-county-input">County:</label>
+                <select id="data-county-input">
+                    <option value="">--</option>
+                </select>
+            </div>
+            <div id="data-county-search-inputs" class="col-md-6 mb-2">
+                <label for="data-county-search-input">County Filter:</label>
+                <input type="text" name="county-search" id="data-county-search-input">
+            </div>
+            <div class="col-md-12 mb-2">
+                <button id="data-table-refresh">Refresh Table &#128472;</button>
+            </div>
 
         </div>
-        <div id="flight-data-table" class="row table-container">
-            <table>
-                <thead>
-                    <th>ICAO24</th>
-                    <th>First Seen</th>
-                    <th>Last Seen</th>
-                    <th>Callsign</th>
-                    <th>Est Departure Airport</th>
-                    <th>Est Arrival Airport</th>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="flight-data-table" class=" table-container d-none">
+                    <table>
+                        <thead>
+                            <th>ICAO24</th>
+                            <th>First Seen</th>
+                            <th>Last Seen</th>
+                            <th>Callsign</th>
+                            <th>Est Departure Airport</th>
+                            <th>Est Arrival Airport</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div id="covid-data-table" class=" table-container">
+                    <table>
+                        <thead>
+                            <th>County</th>
+                            <th>Cumulative Cases</th>
+                            <th>New Cases &#9650;</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
-        <div id="covid-data-table" class="row table-container">
-            <table>
-                <thead>
-                    <th>County</th>
-                    <th>Cumulative Cases</th>
-                    <th>New Cases &#9650;</th>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
+
 
     </section>
 
