@@ -77,6 +77,8 @@ table {
     width: 100%;
 }
 
+#flight-data-table thead,
+#flight-data-table th,
 #covid-data-table thead,
 #covid-data-table th {
     position: sticky;
@@ -84,17 +86,32 @@ table {
     z-index: 1;
 }
 
-#flight-data-table thead,
-#flight-data-table th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
+#flight-data-table tr:hover,
+#covid-data-table tr:hover {
+    background-color: #ddd;
+}
+
+#data-table-refresh {
+    height: 2.5rem;
+    border: black 2px solid;
+    padding: 0.25em 0.5em;
+    background-color: white;
+}
+
+#data-table-refresh:hover {
+    background-color: #ccc;
+}
+
+#data-table-refresh:active {
+    border-color: #888
 }
 
 .table-container {
-    overflow-x: scroll;
-    overflow-y: scroll;
+    overflow-x: auto;
+    overflow-y: auto;
     max-height: 90vh;
+    background-color: white;
+    border: black 2px solid;
 }
 
 th,
