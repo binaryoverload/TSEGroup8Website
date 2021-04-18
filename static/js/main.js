@@ -23,11 +23,15 @@ document.getElementById("data-type-input").addEventListener("change", function(e
     if (e.target.value === "covid") {
         document.getElementById("data-county-inputs").classList.add("d-none")
         document.getElementById("flight-data-table").classList.add("d-none")
+
+        document.getElementById("data-county-search-inputs").classList.remove("d-none")
         document.getElementById("covid-data-table").classList.remove("d-none")
     } else {
+        document.getElementById("data-county-search-inputs").classList.add("d-none")
+        document.getElementById("covid-data-table").classList.add("d-none")
+
         document.getElementById("data-county-inputs").classList.remove("d-none")
         document.getElementById("flight-data-table").classList.remove("d-none")
-        document.getElementById("covid-data-table").classList.add("d-none")
     }
 })
 

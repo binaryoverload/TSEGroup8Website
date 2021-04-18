@@ -83,10 +83,7 @@ const chart = new Chart(ctx, {
 //     document.getElementById("graphing-date-output").innerText = e.target.value
 // });
 
-function convertDateToJSDate(inputDate) {
-    let dateParts = inputDate.split("/");
-    return new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-}
+
 
 function chartUpdate(county) {
     let covidPromise = (county === "all" ? fetch("/covid/summary/all") : fetch("/covid/summary/" + county)).then(r => {
