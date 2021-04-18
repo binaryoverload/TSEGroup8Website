@@ -43,10 +43,6 @@ document.getElementById("data-county-search-input").addEventListener("input", fu
     refreshTableFromDOM()
 })
 
-document.getElementById("data-table-refresh").addEventListener("click", function(e) {
-    refreshTableFromDOM()
-})
-
 function refreshTableFromDOM() {
     let dateInput = document.getElementById("data-date-input").value
 
