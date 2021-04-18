@@ -1,5 +1,6 @@
 import json
 import csv
+import datetime
 
 from website.utils import dateToDatetime
 
@@ -8,6 +9,9 @@ countyCodes = {}
 covidByCounty = {}
 covidTotals = []
 
+airportCountyMapping = {}
+
+flightData = {}
 flightsByCounty = {}
 flightsTotals = {}
 
@@ -53,5 +57,34 @@ with open("data/flights-by-county.csv", "r") as flightsByCountyFile:
         unsortedList = flightsByCounty[county]
         sortedList = sorted(unsortedList, key=lambda row: dateToDatetime(row[0]))
         flightsByCounty[county] = sortedList
+
+with open("data/airport-counties.csv", "r") as airportCountiesFile:
+    next(airportCountiesFile) # Skip header
+    csvReader = csv.reader(airportCountiesFile)
+    for row in csvReader:
+        airportCountyMapping[row[0]] = row[1]
+
+with open("data/flight-data-jan-dec.csv", "r") as flightDataFile:
+    next(flightDataFile) # Skip header
+    csvReader = csv.reader(flightDataFile)
+    for row in csvReader:
+        datetimeFromTimestamp = datetime.datetime.fromtimestamp(int(row[2]))
+        date = datetimeFromTimestamp.strftime("%d/%m/%Y")
+        county = ""
+        if row[5] in airportCountyMapping:
+            county = airportCountyMapping[row[5]] # Convert arrival airport to county
+        else:
+            continue
+
+        if county in flightData:
+            if date in flightData[county]:
+                flightData[county][date].append(row)
+            else:
+                flightData[county][date] = [row]
+        else:
+            flightData[county] = {}
+            flightData[county][date] = [row]
+
+        
 
     
