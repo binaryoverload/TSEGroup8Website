@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TSE</title>
+    <title>TSE Group 8</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#atc-section">ATC Data</a>
+                    <a class="nav-link" href="#graph-section">Graph</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#covid-map-section">COVID-19 Interactive Map</a>
@@ -42,6 +42,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#raw-data-section">Raw Data</a>
                 </li>
+                <div class="nav-item">
+                    <a href="#data-comments-section" class="nav-link">Data Conclusions                    </a>
+                </div>
                 <li class="nav-item">
                     <a class="nav-link" href="#attributions-section">Attributions</a>
                 </li>
@@ -51,14 +54,21 @@
 
     <section class="welcome container my-3" id="S1">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 my-3">
                 <h2 class="titleText">Welcome</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>Lorem ipsum dolor
-                    sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>This website is the artifact for a Team Software Engineering assessment produced by TSE Group 8. The module is a second year Computer Science module at the University of Lincoln. The group consists of the following members:</p>
+                <ul>
+                    <li>William S Oldham (19693813)</li>
+                    <li>Ben C Gallard-Bridger (19693078)</li>
+                    <li>Kacper Gajos (19705067)</li>
+                    <li>Thomas Anderson (19701195)</li>
+                    <li>Shane Lawson (18680054)</li>
+                    <li>Connor Bull (19702845)</li>
+                </ul>
+                <p>The aim of the project is to analyse COVID-19 and flight data and present it in a way that allows a comparison to be made between the two datasets.</p>
             </div>
-            <div class="col-md-6 d-none d-md-block justify-items-center">
-                <img style="width: 100%" src="static/images/pexels-lukas-669610.jpg">
+            <div class="col-md-6 d-none d-md-flex justify-items-center">
+                <img class="align-self-center w-100" src="static/images/pexels-lukas-669610.jpg">
             </div>
         </div>
     </section>
@@ -267,10 +277,34 @@
             </div>
             <div class="col-md-6">
                 <h4>Flights Dataset</h4>
-                <p>The flight dataset was very </p>
+                <p>The flight dataset was very kindly provided to the project by the <a href="https://opensky-network.org/" rel="noopener" target="_blank">OpenSky Network</a> as part of their <a href="https://zenodo.org/record/3974209#.YH6vJOhKiUk" rel="noopener"
+                        target="_blank">COVID-19 dataset</a> </p>
+                <p>The fields that were used from this dataset were:</p>
+                <ul>
+                    <li>ICAO24 - The 24-bit address assigned to the aircraft.</li>
+                    <li>First Seen - The earliest point the aircraft appeared on the OpenSky network.</li>
+                    <li>Last Seen - The last point the aircraft was seen on the OpenSky network.</li>
+                    <li>Callsign - The 5 digit callsign of the flight.</li>
+                    <li>Estimated Departure Airport - The airport the aircraft is estimated to have departed from.</li>
+                    <li>Estimated Arrival Airport - The airport the aircraft is expected to land at.</li>
+                </ul>
+                <p>The key limitation with the dataset is that it is not indicative of where people arriving end up travelling to within the UK. This means that it is difficult to narrow down on a county-level basis whether the amount of flights coming into
+                    that county affected the rate of COVID-19 cases.</p>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Conclusions</h3>
+                <p>Even though it hasn't been possible for this project to specifically correlate the flights coming into the UK and COVID-19 cases, some clear conclusions can be drawn from the data:</p>
+                <ul>
+                    <li>As expected, the number of flights sharply declined at the end of March 2020 to just under 20% of the number beforehand.</li>
+                    <li>Even within the first national lockdown, the number of remaining flights remained steady which has been shown in other research to be cargo flights.</li>
+                    <li>After the first national lockdown, flights still only returned to around 80% of the pre-covid number showing a reluctance of people to travel.</li>
+                    <li>Even though the COVID-19 cases from October onwards rose much more quickly than in March, the affect on the number of flights was not as dramatic as in March. The number of flights only reduced to around 40% of the pre-covid amount;
+                        twice the number in the first national lockdown.</li>
+                </ul>
+            </div>
+        </div>
     </section>
 
     <hr>
@@ -312,12 +346,7 @@
     <footer class="py-5 px-2 px-md-0">
         <div class="container">
             <div class="row">
-                <div class="sec col-md-4" id="footer-about-us">
-                    <h2>About Us</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-
-                <div class="sec col-md-4" id="footer-quick-links">
+                <div class="sec col-md-6" id="footer-quick-links">
                     <h2>Quick Links</h2>
                     <ul>
                         <li><a href="#">Home</a></li>
@@ -326,7 +355,7 @@
                         <li><a href="#">RAW Data</a></li>
                     </ul>
                 </div>
-                <div class="sec col-md-4" id="footer-team-members">
+                <div class="sec col-md-6" id="footer-team-members">
                     <h2>Team Members</h2>
                     <p>William S Oldham (19693813)</p>
                     <p>Connor Bull (19702845)</p>
