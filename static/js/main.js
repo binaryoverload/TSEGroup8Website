@@ -113,8 +113,14 @@ async function refreshTable(mode, date, county) {
 
                 // First Seen
                 row[1] = dateTimeFormat.format(new Date(row[1] * 1000))
-                    // Last Seen
+
+                // Last Seen
                 row[2] = dateTimeFormat.format(new Date(row[2] * 1000))
+
+                // Departure Airport
+                if (row[4].trim() === "NULL") {
+                    row[4] = "- Unknown -"
+                }
 
                 for (let cell of row) {
                     rowElement.innerHTML += `<td>${cell}</td>`
