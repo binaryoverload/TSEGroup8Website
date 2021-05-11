@@ -13,6 +13,7 @@ This website can take some time to load.
 # **Technolgies Used for the Artefact**
 
 API - Python, Flask
+
 Website - HTML, CSS, Bootstrap 4 Libraries
 
 # **Other Repositories Related to This Project**
